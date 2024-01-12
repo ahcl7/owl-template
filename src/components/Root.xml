@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="TodoTask" owl="1">
+        <div class="task" t-att-class="props.task.isCompleted ? 'done' : ''">
+            <input type="checkbox" t-att-checked="props.task.isCompleted"
+                   t-on-click="() => dispatch('toggleTask', props.task.id)"/>
+            <span>
+                <t t-esc="props.task.text"></t>
+            </span>
+            <span class="delete" t-on-click="() => dispatch('deleteTask', props.task.id)">🗑</span>
+        </div>
+    </t>
+
+    <t t-name="TodoApp" owl="1">
+        <div class="todo-app">
+            <div class="task-list">
+                <MbfDatetimePicker onSelectDate="onSelectDate"/>
+            </div>
+        </div>
+    </t>
+</templates>

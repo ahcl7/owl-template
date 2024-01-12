@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="MonthYearPicker">
+        <div class="month-year-picker-container">
+            <div class="month-year-picker-header">
+                <div style="width: 24px; cursor: pointer; flex:1" t-on-click="prev">
+                    <i class="fa fa-angle-left" style="font-size:24px"></i>
+                </div>
+                <div style="flex:1; text-align: center; cursor:pointer" t-on-click="changeMode('year')">
+                    <span t-esc="title"/>
+                </div>
+                <div style="width: 24px; cursor: pointer; flex:1; text-align:right" t-on-click="next">
+                    <i class="fa fa-angle-right" style="font-size:24px"></i>
+                </div>
+            </div>
+            <div class="month-year-picker-content">
+                <div t-att-class="'month-year-picker-content-item month-year-picker-content-item' + (isSelected(item) ? '--selected' : '')"
+                     t-foreach="items"
+                     t-as="item"
+                     t-key="item.id"
+                     t-on-click="item.onClick"
+                >
+                    <span t-esc="item.text"/>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

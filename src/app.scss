@@ -1,0 +1,136 @@
+body {
+  font-family: Lato, serif;
+}
+
+.mbf-datetime-picker {
+  &-container {
+    color: #2D3748;
+    max-width: 224px;
+  }
+
+  &-header {
+    display: flex;
+    line-height: 2;
+  }
+
+  &-content {
+    user-select: none;
+
+    &--date {
+      //max-width: 300px;
+      display: grid;
+      grid-template-columns: repeat(7, 32px);
+
+      &-item {
+        text-align: center;
+        line-height: 2;
+        max-width: 32px;
+        min-width: 32px;
+        max-height: 32px;
+        min-height: 32px;
+        //border: 1px solid red;
+
+        &__selected {
+          border-radius: 100%;
+          background-color: #4E73F814;
+        }
+
+        &:hover:not([disabled]) {
+          border-radius: 100%;
+          background-color: #4E73F814;
+          cursor: pointer;
+        }
+
+        &[disabled] {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+.month-year-picker {
+  &-container {
+
+  }
+
+  &-header {
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    &-item {
+      height: 24px;
+      text-align: center;
+      line-height: 1.5;
+      border-radius: 4px;
+
+      &--selected {
+        background-color: #4E73F814;
+      }
+
+      &:hover:not([disabled]) {
+        background-color: #4E73F814;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.time-picker {
+  &-container {
+    user-select: none;
+    position: relative;
+  }
+
+  &-clock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    //background-color: ;
+    border-radius: 100%;
+    border: 1px solid gray;
+
+    &-item {
+      position: absolute;
+      border-radius: 100%;
+
+      &--selected {
+      }
+    }
+
+  }
+
+  &-canvas line {
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke: #007AFF;
+  }
+
+  &-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &-fg {
+      stroke: none;
+      fill: #0095dd;
+    }
+
+    &-bg {
+      stroke: none;
+      fill: #c0e5f7;
+    }
+
+    &-bearing {
+      stroke: none;
+      fill: #007AFF;
+    }
+  }
+}

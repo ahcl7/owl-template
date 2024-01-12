@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="TimePicker">
+        <div class="time-picker-container">
+            <div class="time-picker-canvas">
+                <svg class="time-picker-svg" t-att-width="size" t-att-height="size">
+                    <g t-att-transform="`translate(${size / 2},${size/2})`">
+                        <line x1="0" y1="0" t-att-x2="X2" t-att-y2="Y2"/>
+                        <circle class="time-picker-canvas-fg" r="3.5" t-att-cx="X2"
+                                t-att-cy="Y2"/>
+                        <circle class="time-picker-canvas-bg" r="13" t-att-cx="X2"
+                                t-att-cy="Y2"/>
+                        <circle class="time-picker-canvas-bearing" cx="0" cy="0" r="2"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="time-picker-clock"
+                 t-att-style="objectToStrStyle({'width': `${size}px`, 'height': `${size}px`})"
+                 t-on-mousedown="onMouseDown"
+                 t-on-mousemove="onMouseMove"
+            >
+                <div t-foreach="items"
+                     t-as="item"
+                     t-key="item.id"
+                     class="time-picker-clock-item"
+                     t-att-style="getItemStyle(item)"
+                     t-if="item.show"
+                >
+                    <span t-esc="item.text"/>
+                </div>
+            </div>
+
+
+        </div>
+    </t>
+</templates>

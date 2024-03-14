@@ -2,7 +2,7 @@ import {owl} from "@odoo/owl";
 import {MonthYearPicker} from "./monthyearpicker";
 import {TimePicker} from "./timepicker";
 
-const {useState} = owl.hooks
+const {useState, useRef} = owl.hooks
 const {Component} = owl
 
 export class MbfDatetimePicker extends Component {
@@ -17,16 +17,19 @@ export class MbfDatetimePicker extends Component {
 
     setup() {
         this.state = useState({
-            mode: MbfDatetimePicker.modes.TIME,
+            mode: MbfDatetimePicker.modes.DATE,
             selectedMonth: 1,
             selectedYear: 2024,
             selectedDate: 1,
             selectedHour: 0,
             selectedMinute: 0,
-            selectedSecond: 0
+            selectedSecond: 0,
+            showingMonth:  1,
+            showingYear: 2024
         })
-        this.state.showingMonth = this.state.seletedMonth
-        this.state.showingYear = this.state.seletedYear
+
+        console.log(useRef("asdf"))
+
     }
 
     get items() {
@@ -66,6 +69,7 @@ export class MbfDatetimePicker extends Component {
             })
             lastDayOfMonth.setDate(lastDayOfMonth.getDate() + 1);
         }
+
         return ret;
     }
 
@@ -93,16 +97,18 @@ export class MbfDatetimePicker extends Component {
         }
     }
 
+    emitSelectedDateTime() {
+        const selectedDate = new Date(this.state.selectedYear, this.state.selectedMonth - 1, this.state.selectedDate, this.state.selectedHour, this.state.selectedMinute, this.state.selectedSecond)
+        if (this.props.onSelectDate) {
+            this.props.onSelectDate(selectedDate)
+        }
+    }
     selectDate(item) {
         if (item.disabled) return;
         this.state.selectedDate = item.value
         this.state.selectedMonth = this.state.showingMonth
         this.state.selectedYear = this.state.showingYear
-        console.log(this.state)
-        const selectedDate = new Date(this.state.selectedYear, this.state.selectedMonth - 1, this.state.selectedDate, this.state.selectedHour, this.state.selectedMinute, this.state.selectedSecond)
-        if (this.props.onSelectDate) {
-            this.props.onSelectDate(selectedDate)
-        }
+        this.emitSelectedDateTime()
     }
     changeMode(mode) {
         this.state.mode = mode
@@ -116,5 +122,9 @@ export class MbfDatetimePicker extends Component {
     }
     onTimeSelected(hour, minute) {
         console.log(hour, minute)
+        this.state.selectedHour = hour
+        this.state.selectedMinute = minute
+        this.emitSelectedDateTime()
+        this.changeMode(MbfDatetimePicker.modes.DATE)
     }
 }

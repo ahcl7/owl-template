@@ -18,6 +18,9 @@
                  t-att-style="objectToStrStyle({'width': `${size}px`, 'height': `${size}px`})"
                  t-on-mousedown="onMouseDown"
                  t-on-mousemove="onMouseMove"
+                 t-on-touchstart="onMouseDown"
+                 t-on-touchmove="onMouseMove"
+                 t-on-touchend="onMouseOut"
             >
                 <div t-foreach="items"
                      t-as="item"
@@ -29,8 +32,6 @@
                     <span t-esc="item.text"/>
                 </div>
             </div>
-
-
         </div>
     </t>
 </templates>
